@@ -21,6 +21,30 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+// forecaset
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = "";
+  let days = ["Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="forecast-item">
+            <img
+              src="http://openweathermap.org/img/wn/50d@2x.png"
+              alt="Weather icon"
+            />
+            <h3><span class="high">23°</span> | <span class="low">11°</span></h3>
+            <h4>${day}</h4>
+      </div>`;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+//
+
 function displayTemp(response) {
   let tempElement = document.querySelector("#curr-temp");
   tempElement.innerHTML = Math.round(response.data.main.temp);
@@ -89,3 +113,5 @@ let unitsBtn = document.querySelector("#units-btn");
 unitsBtn.addEventListener("click", changeUnits);
 
 search("Westlock");
+// forecast
+displayForecast();
