@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla Weather App</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+    <script
+      src="https://kit.fontawesome.com/ee81f0d950.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="weather-container">
+      <div class="weather-search">
+        <form class="search-form" id="search-form">
+          <input
+            class="search-input"
+            type="text"
+            name="search"
+            id="search-input"
+            placeholder="Search a location.."
+          />
+          <input class="search-btn" type="submit" value="Search" />
+        </form>
+        <button class="current-loc-btn">Current Location</button>
+      </div>
+
+      <div class="current-weather-container">
+        <div class="current-weather-info">
+          <h1 id="curr-city"></h1>
+          <h2 id="curr-description"></h2>
+          <h3>Last updated: <span id="curr-date"></span></h3>
+          <ul>
+            <li>
+              Wind:
+              <span id="wind">6.69</span>km/h
+            </li>
+            <li>
+              Humidity:
+              <span id="humidity">58</span>%
+            </li>
+            <li>
+              Low:
+              <span id="low-temp">24</span>°C
+            </li>
+            <li>
+              High:
+              <span id="high-temp">24</span>°C
+            </li>
+          </ul>
+        </div>
+
+        <div class="current-weather-display">
+          <!-- <i class="fa-solid fa-sun"></i> -->
+          <img src="" alt="Weather icon" id="icon" />
+          <h2><span id="curr-temp"></span>°<span id="units">C</span></h2>
+        </div>
+      </div>
+
+      <div class="forecast-container">
+        <div class="forecast-item">
+          <i class="fa-solid fa-sun"></i>
+          <h3>23°C</h3>
+          <h4>Wednesday</h4>
+        </div>
+        <div class="forecast-item">
+          <i class="fa-solid fa-sun"></i>
+          <h3>23°C</h3>
+          <h4>Thursday</h4>
+        </div>
+        <div class="forecast-item">
+          <i class="fa-solid fa-sun"></i>
+          <h3>23°C</h3>
+          <h4>Friday</h4>
+        </div>
+        <div class="forecast-item">
+          <i class="fa-solid fa-sun"></i>
+          <h3>23°C</h3>
+          <h4>Saturday</h4>
+        </div>
+        <div class="forecast-item">
+          <i class="fa-solid fa-sun"></i>
+          <h3>23°C</h3>
+          <h4>Sunday</h4>
+        </div>
+      </div>
+      <button class="unit-button" id="units-btn">°C / °F</button>
+
+      <a
+        href="https://github.com/kierraDahlin/weather-app-vanilla"
+        class="author-note"
+        >Built by Kierra Dahlin</a
+      >
+    </div>
+
+    <script src="src/app.js"></script>
+  </body>
+</html>
