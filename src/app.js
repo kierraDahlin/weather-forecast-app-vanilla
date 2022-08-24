@@ -23,7 +23,9 @@ function formatDate(timestamp) {
 
 // forecaset
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data);
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = "";
@@ -44,6 +46,13 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 //
+
+function getForecast(coordinates) {
+  let apiKey = "cac27e453346e9164edaf605b6536f2f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  // console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function displayTemp(response) {
   let tempElement = document.querySelector("#curr-temp");
@@ -76,6 +85,9 @@ function displayTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  // get lat and long
+  getForecast(response.data.coord);
 }
 
 function search(city) {
@@ -113,5 +125,3 @@ let unitsBtn = document.querySelector("#units-btn");
 unitsBtn.addEventListener("click", changeUnits);
 
 search("Westlock");
-// forecast
-displayForecast();
