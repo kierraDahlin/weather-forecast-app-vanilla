@@ -38,6 +38,7 @@ h4::first-letter {
 p,
 a,
 li,
+h3 span.low,
 h4 {
   font-weight: 300;
 }
@@ -107,6 +108,12 @@ button:hover,
   margin-bottom: 60px;
 }
 
+.current-weather-container i {
+  font-size: 60px;
+  color: #cca8e9;
+  margin-bottom: 20px;
+}
+
 .current-weather-display {
   width: 200px;
   height: 200px;
@@ -125,10 +132,8 @@ button:hover,
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.current-weather-container i {
-  font-size: 60px;
-  color: #cca8e9;
-  margin-bottom: 20px;
+.current-weather-display h2 {
+  font-size: 42px;
 }
 
 .forecast-container {
@@ -154,10 +159,8 @@ button:hover,
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.forecast-item i {
-  font-size: 30px;
-  color: #cca8e9;
-  margin-bottom: 10px;
+.forecast-item img {
+  width: 50px;
 }
 
 .author-note {
