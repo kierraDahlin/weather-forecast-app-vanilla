@@ -23,24 +23,41 @@ function formatDate(timestamp) {
 
 // forecast
 
+function formatForecast(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
-  console.log(response.data);
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
 
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = "";
-  let days = ["Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="forecast-item">
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="forecast-item">
             <img
-              src="http://openweathermap.org/img/wn/50d@2x.png"
+              src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png"
               alt="Weather icon"
             />
-            <h3><span class="high">23°</span> | <span class="low">11°</span></h3>
-            <h4>${day}</h4>
+            <h3><span class="high">${Math.round(
+              forecastDay.temp.max
+            )}°</span> | <span class="low">${Math.round(
+          forecastDay.temp.min
+        )}°</span></h3>
+            <h4>${formatForecast(forecastDay.dt)}</h4>
       </div>`;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML;
@@ -49,7 +66,8 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiKey = "cac27e453346e9164edaf605b6536f2f";
+  // I had to use a different api key from the shecodes team that they gave me
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
