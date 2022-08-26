@@ -26,7 +26,6 @@ function formatForecast(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
   return days[day];
 }
 
@@ -58,7 +57,6 @@ function displayForecast(response) {
 
   forecastElement.innerHTML = forecastHTML;
 }
-//
 
 function getForecast(coordinates) {
   // I had to use a different api key from the shecodes team that they gave me
@@ -98,7 +96,6 @@ function displayTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
-
   // get lat and long
   getForecast(response.data.coord);
 }
@@ -106,7 +103,6 @@ function displayTemp(response) {
 function search(city) {
   let apiKey = "cac27e453346e9164edaf605b6536f2f";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(displayTemp);
 }
 
@@ -116,25 +112,21 @@ function handleSubmit(event) {
   search(cityInput.value);
 }
 
-function changeUnits(event) {
-  event.preventDefault();
-  let tempElement = document.querySelector("#curr-temp");
-  let temp = tempElement.innerHTML;
-  temp = Number(temp);
-  if (unitsSpan.innerHTML === "C") {
-    tempElement.innerHTML = Math.round((temp * 9) / 5 + 32);
-    unitsSpan.innerHTML = "F";
-  } else {
-    tempElement.innerHTML = Math.round(((temp - 32) * 5) / 9);
-    unitsSpan.innerHTML = "C";
-  }
-}
-
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-let unitsSpan = document.querySelector("#units");
-let unitsBtn = document.querySelector("#units-btn");
-unitsBtn.addEventListener("click", changeUnits);
+search("New York");
 
-search("Westlock");
+// get current location
+function getPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "cac27e453346e9164edaf605b6536f2f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayTemp);
+}
+function getCurrentLocation() {
+  navigator.geolocation.getCurrentPosition(getPosition);
+}
+let currLocBtn = document.querySelector("#location-btn");
+currLocBtn.addEventListener("click", getCurrentLocation);
